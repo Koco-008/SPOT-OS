@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+build/
+dist/
+outputs/
+*.egg-info/
+spot_os/artwork/splash.tga
+spot_os/native/spot-splash
+spot_os/native/foreign.h
+spot_os/native/foreign.c
+spot_os/native/presentation.h
+spot_os/native/presentation.c
