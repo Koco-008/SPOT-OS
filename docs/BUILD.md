@@ -3,10 +3,12 @@
 Voraussetzungen: Python 3.11+, `Pillow` und für Tests `pytest`; für den nativen Wayland-Client zusätzliche Ubuntu/Debian-Pakete `libgtk-3-dev`, `libgtk-layer-shell-dev`, `libwayland-dev`, `wayland-protocols`, `libwayland-bin`, `pkg-config`, `gcc`, `make`.
 
 ```bash
-python3 -m pip install --user Pillow pytest
-python3 tools/restore_generated_assets.py
-python3 -m compileall -q spot_os
-python3 -m spot_os.package --output ./build
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install Pillow pytest
+python tools/restore_generated_assets.py
+python -m compileall -q spot_os
+python -m spot_os.package --output ./build
 make -C spot_os/native
 ```
 
