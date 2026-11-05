@@ -1,0 +1,13 @@
+[Unit]
+Description=SPOT OS bounded boot guard and VT preparation
+After=systemd-user-sessions.service
+Before=spot-os-session.service
+ConditionPathExists=/etc/spot-os/config.json
+OnFailure=spot-os-failure.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/spot-os prepare-session
+StandardInput=null
+TimeoutStartSec=15
+UMask=0077

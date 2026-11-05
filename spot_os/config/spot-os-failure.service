@@ -1,0 +1,9 @@
+[Unit]
+Description=Persist SPOT OS failure diagnostics without touching the display session
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/spot-os snapshot-failure
+StandardInput=null
+TimeoutStartSec=45
+UMask=0077

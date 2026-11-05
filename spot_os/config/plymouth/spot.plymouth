@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=SPOT
+Description=Original SPOT logo on white
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/spot
+ScriptFile=/usr/share/plymouth/themes/spot/spot.script

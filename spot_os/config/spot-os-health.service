@@ -1,0 +1,13 @@
+[Unit]
+Description=SPOT OS application boot readiness (failure keeps graphical recovery alive)
+After=spot-os-session.service
+PartOf=spot-os-session.service
+ConditionPathExists=/etc/spot-os/config.json
+OnFailure=spot-os-failure.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/spot-os boot-check
+StandardInput=null
+TimeoutStartSec=125
+UMask=0077

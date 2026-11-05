@@ -1,0 +1,16 @@
+[Unit]
+Description=SPOT OS bounded read-only Lepton producer/format readiness
+After=spot-os-prepare.service lepton-streamer.service
+Wants=lepton-streamer.service
+Before=spot-os-session.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/spot-os camera-ready
+StandardInput=null
+TimeoutStartSec=14
+TimeoutStopSec=1
+KillMode=control-group
+SendSIGKILL=yes
+Restart=no
+UMask=0077

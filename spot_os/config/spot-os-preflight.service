@@ -1,0 +1,24 @@
+[Unit]
+Description=Read-only host kernel prerequisites for the isolated SPOT OS updater
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/bin/python3 -I /usr/local/lib/spot-os/admin_entry.py --boot-facts
+TimeoutStartSec=20
+UMask=0077
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+ProtectSystem=strict
+ProtectHome=yes
+ReadOnlyPaths=/run
+ReadWritePaths=/run/spot-os
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+# Must READ the module inventory. No module capabilities or module syscalls.
+ProtectKernelModules=no
+SystemCallFilter=~@mount @reboot @swap @module
+RestrictAddressFamilies=AF_UNIX
+RestrictSUIDSGID=yes
+ProtectControlGroups=yes
+LockPersonality=yes
