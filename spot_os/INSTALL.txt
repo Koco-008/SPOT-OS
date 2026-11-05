@@ -1,0 +1,15 @@
+SPOT OS 0.1.7 / signed-os-updates-1 - Release-Vorbereitung, nicht veröffentlicht
+
+Vorgesehen: os-v0.1.7, Sequenz107, stable, OS-Min/Max0.1.6, App-Min0.28.13.
+Kein automatischer Pi-Reboot. App, Treiber, Trust und Benutzerdaten unverändert.
+
+016 auf 017 nutzt den normalen Touch-Updater; keine 014-Bridge erforderlich.
+Erfolg verlangt bestätigten neuen Updater und gesunde GUI/Kamera.
+OTA_TEST_017.md: Betreiberabnahme, Nachweise, Fehlerfälle und Test-SD-Rollback.
+HANDOVER_017.md: Ursache, Prozess-/Journalverträge und Sicherheitsgrenzen.
+RELEASE_017.md: Release-Daten. Stable-Signierung nur nach expliziter Freigabe.
+Neue Geräte: bisheriger ausdrücklicher Setup nach LEPTON_PROVISIONING.md.
+Historische 014-auf-016-Bridge ausschliesslich nach MIGRATION_014_016.md.
+
+Unsignierte CI-/Entwicklungs-ZIPs sind keine offiziellen installierbaren Updates.
+Dieser Auftrag führt keine Veröffentlichung oder Geräteeingriffe aus.
