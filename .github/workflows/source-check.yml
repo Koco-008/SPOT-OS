@@ -1,0 +1,38 @@
+name: Public OS source checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install test/build dependencies (no device or signing secrets)
+        run: python -m pip install 'Pillow>=10,<13' 'pytest>=8,<10' 'cryptography>=42'
+      - name: Reconstruct and verify original boot artwork
+        run: python tools/restore_generated_assets.py
+      - name: Python syntax
+        run: python -m compileall -q spot_os
+      - name: Independent package validation
+        run: |
+          python -m spot_os.package --output ./build
+          python - <<'PY'
+          from pathlib import Path
+          import zipfile
+          from spot_os.package import verify_package
+          archive = Path('build/spot-os-0.1.7.zip')
+          assert archive.exists()
+          with zipfile.ZipFile(archive) as z:
+              z.extractall('build/unpacked')
+          verify_package(Path('build/unpacked/spot_os'))
+          print('Source package and all packaged members verified')
+          PY
+      - name: OS package tests
+        run: python -m pytest spot_os/tests/test_assets_package.py spot_os/tests/test_boot_guard.py spot_os/tests/test_backlight.py spot_os/tests/test_installer.py -q
