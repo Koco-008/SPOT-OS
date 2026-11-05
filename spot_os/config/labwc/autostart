@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+export PYTHONPATH=/usr/local/lib/spot-os
+exec /usr/bin/python3 -m spot_os.session

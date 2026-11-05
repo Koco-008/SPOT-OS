@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<labwc_config>
+  <core>
+    <reuseOutputMode>yes</reuseOutputMode>
+    <gap>0</gap>
+    <decoration>server</decoration>
+    <errorCommand>/usr/bin/logger -t spot-os-labwc</errorCommand>
+  </core>
+  <theme><keepBorder>no</keepBorder><dropShadows>no</dropShadows></theme>
+  <desktops number="1"><popupTime>0</popupTime></desktops>
+  <keyboard/>
+  <mouse/>
+  <windowRules>
+    <windowRule identifier="spot-app" serverDecoration="no">
+      <skipWindowSwitcher>yes</skipWindowSwitcher>
+      <fixedPosition>yes</fixedPosition>
+    </windowRule>
+  </windowRules>
+</labwc_config>
