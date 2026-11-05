@@ -35,10 +35,14 @@ Benötigt wird Python 3.11+ mit Pillow, für Tests ausserdem pytest und bei Beda
 ```bash
 git clone https://github.com/Koco-008/SPOT-OS.git
 cd SPOT-OS
-python3 -m pip install --user Pillow pytest
-python3 tools/restore_generated_assets.py
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install Pillow pytest
+python tools/restore_generated_assets.py
 python3 -m spot_os.package --output ./build
 ```
+
+*Hinweis:* Ältere unverändert übernommene Dateien wie `spot_os/README.md` und `spot_os/INSTALL.txt` dokumentieren teilweise die Situation **vor** der Stable-Veröffentlichung. Für den aktuellen Stand gelten diese Einstiegs-README, `docs/PROVENANCE.md` und der offizielle signierte Release.
 
 Das Skript stellt `spot_os/artwork/splash.tga` aus den unveränderten offiziellen PNG-Pixeln her und kontrolliert die ursprüngliche SHA256. Kein Netz- oder GitHub-Token wird dafür benötigt. Siehe [Builddetails](docs/BUILD.md).
 
