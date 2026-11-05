@@ -1,0 +1,48 @@
+[Unit]
+Description=Dedicated verified SPOT OS update transaction owner
+After=network-online.target spot-os-update.socket
+Requires=spot-os-update.socket
+Before=spot-os-session.service
+StartLimitIntervalSec=120
+StartLimitBurst=3
+
+[Service]
+Type=notify
+NotifyAccess=main
+TimeoutStartSec=30
+User=root
+ExecStart=/usr/bin/python3 -I /usr/local/lib/spot-os/admin_entry.py --update-service
+Environment=SPOT_OS_ISOLATED_PREFLIGHT=1
+StateDirectory=spot-os
+StateDirectoryMode=0700
+RuntimeDirectory=spot-os
+RuntimeDirectoryMode=0711
+RuntimeDirectoryPreserve=yes
+UMask=0077
+Restart=on-failure
+SuccessExitStatus=75
+RestartForceExitStatus=75
+RestartSec=15
+TimeoutStopSec=150
+KillMode=control-group
+NoNewPrivileges=yes
+CapabilityBoundingSet=CAP_CHOWN CAP_DAC_OVERRIDE CAP_FOWNER CAP_KILL CAP_SETGID CAP_SETUID CAP_SYS_PTRACE CAP_AUDIT_WRITE
+AmbientCapabilities=CAP_SETUID CAP_SETGID
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadOnlyPaths=/run
+ReadWritePaths=/var/lib/spot-os /run/spot-os /usr/local/lib/spot-os /usr/local/bin /etc/spot-os /etc/systemd/system /etc/pam.d /var/log/spot-os /run/lock/spot-lepton/cci.lock
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictSUIDSGID=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+LockPersonality=yes
+SystemCallFilter=~@mount @reboot @swap
+StandardInput=null
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

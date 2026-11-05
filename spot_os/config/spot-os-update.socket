@@ -1,0 +1,14 @@
+[Unit]
+Description=Authenticated local SPOT OS update requests
+
+[Socket]
+ListenStream=/run/spot-os-update/control.sock
+SocketUser=root
+SocketGroup=@GID@
+SocketMode=0660
+DirectoryMode=0755
+RemoveOnStop=yes
+Service=spot-os-update.service
+
+[Install]
+WantedBy=sockets.target

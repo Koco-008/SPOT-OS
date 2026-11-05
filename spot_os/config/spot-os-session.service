@@ -1,0 +1,49 @@
+[Unit]
+Description=SPOT OS dedicated Wayland instrument session
+After=systemd-user-sessions.service plymouth-quit.service spot-os-prepare.service lepton-streamer.service spot-os-lepton-ready.service
+Requires=spot-os-prepare.service
+Wants=lepton-streamer.service spot-os-lepton-ready.service spot-os-health.service spot-os-update.socket
+Conflicts=getty@tty1.service display-manager.service
+StartLimitIntervalSec=120
+StartLimitBurst=3
+ConditionPathExists=/etc/spot-os/config.json
+ConditionPathExists=!/var/lib/spot-os/updates/session-blocked
+OnFailure=spot-os-failure.service
+
+[Service]
+Type=notify
+NotifyAccess=main
+User=@USER@
+WorkingDirectory=@HOME@
+PAMName=spot-os
+TTYPath=/dev/tty1
+StandardInput=tty-fail
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=spot-os
+TTYReset=yes
+TTYVHangup=no
+TTYVTDisallocate=no
+UtmpIdentifier=tty1
+Environment=XDG_SESSION_TYPE=wayland XDG_SESSION_CLASS=user XDG_SEAT=seat0 XDG_VTNR=1
+Environment=XDG_CURRENT_DESKTOP=SPOT XDG_SESSION_DESKTOP=spot-os
+Environment=PYTHONPATH=/usr/local/lib/spot-os
+Environment=QT_QPA_PLATFORM=wayland GDK_BACKEND=wayland
+LogsDirectory=spot-os
+LogsDirectoryMode=0700
+ExecStart=/usr/bin/python3 -m spot_os.supervisor
+Restart=on-failure
+RestartForceExitStatus=SIGHUP SIGPIPE SIGINT
+RestartSec=15
+TimeoutStartSec=45
+TimeoutStopSec=90
+KillMode=control-group
+SendSIGKILL=no
+WatchdogSec=20
+WatchdogSignal=SIGTERM
+UMask=0077
+LogRateLimitIntervalSec=30
+LogRateLimitBurst=100
+
+[Install]
+WantedBy=graphical.target
