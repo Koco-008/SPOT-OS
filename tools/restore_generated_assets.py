@@ -7,9 +7,11 @@ from hashlib import sha256
 import json
 from pathlib import Path
 import struct
+import sys
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 ART = ROOT / 'spot_os' / 'artwork'
 EXPECTED = '71f79634787c37e62a52cac2b072716fca48f8fb0786ddd92850f91496587c11'
 
