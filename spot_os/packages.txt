@@ -1,0 +1,25 @@
+# Install explicitly from the configured Debian13/RPi repository, no automatic upgrade.
+# Exact locally installed versions are captured in installation.json/package-lock.json.
+labwc
+dbus-user-session
+libpam-systemd
+libgtk-3-0t64
+libgtk-layer-shell0
+libgtk-3-dev
+libgtk-layer-shell-dev
+libwayland-dev
+wayland-protocols
+libwayland-bin
+pkg-config
+gcc
+make
+python3
+python3-pil
+python3-evdev
+plymouth
+plymouth-themes
+initramfs-tools
+rpi-splash-screen-support
+kbd
+python3-pyside6.qtnetwork
+python3-cryptography

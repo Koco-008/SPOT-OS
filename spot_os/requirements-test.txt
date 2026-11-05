@@ -1,0 +1,2 @@
+# Rendering/asset tooling, never added to the signed application environment.
+Pillow==12.3.0
